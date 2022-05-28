@@ -1,0 +1,11 @@
+.footer-container{
+    background-color: #fff;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-top: 50px;
+    z-index: 0;
+}
+
+.footer-container>h3, h2, p{
+    margin: 0;
+}

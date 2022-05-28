@@ -1,0 +1,31 @@
+.product-detail-img{
+    width: 100%;
+    height: auto;
+    min-height: 430px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: rgb(204, 220, 242);
+}
+.product-container{
+    background-color: #fff;
+    padding: 30px;
+    margin-top: 130px;
+    border-radius: 30px;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
+}
+.product-list-img{
+    display: flex;
+    margin-top: 10px;
+}
+.img-product-mini{
+    width: 18%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px ;
+    cursor: pointer;
+}
+.img-product-mini_active{
+    background-color: rgb(204, 220, 242);
+}

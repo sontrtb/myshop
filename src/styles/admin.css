@@ -1,0 +1,24 @@
+.container-admin{
+    min-height: calc(100vh - 129px);
+    padding-bottom: 100px;
+}
+table{
+    width: 100%;
+    margin-top: 30px;
+    border: 2px solid #ddd;
+    background-color: #fff;
+}
+.admin-products-img{
+    height: 90px;
+    max-width: 90px;
+}
+td{
+    text-align: center;
+    padding: 20px 10px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.admin-list-img{
+    height: 90px;
+    max-width: 90px;
+}
