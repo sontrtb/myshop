@@ -1,0 +1,28 @@
+.input-quaitity-container{
+    margin-left: 30px;
+    display: flex;
+}
+
+.input-quaitity_input{
+    width: 50px;
+    height: 30px;
+    padding: 0 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+.input-quaitity_input:focus{
+    outline: none;
+}
+
+.input-quaitity_btn{
+    outline: none;
+    border: 1px solid #ccc;
+    height: 30px;
+    width: 30px;
+}
+.input-quaitity_btn:hover{
+    cursor: pointer;
+}
+.input-quaitity_btn:active{
+    background-color: rgb(238, 216, 210);
+}

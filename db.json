@@ -1,0 +1,32 @@
+{
+  "products": [
+    {
+      "name": "Xiaomi 11T",
+      "price": "2000",
+      "description": "ưdwwd",
+      "image": "https://cdn.tgdd.vn/Products/Images/42/248293/Xiaomi-11T-White-1-2-3-600x600.jpg",
+      "id": 6
+    },
+    {
+      "name": "dwdwd",
+      "price": "1000",
+      "description": "defef je ed",
+      "image": "https://cdn.tgdd.vn/Products/Images/42/249102/vivo-y33s-den%20(1)-600x600.jpg",
+      "id": 7
+    },
+    {
+      "name": "fefefe",
+      "price": "3000",
+      "description": "efefef",
+      "image": "https://cdn.tgdd.vn/Products/Images/42/245607/Vivo-V23e-1-2-600x600.jpg",
+      "id": 8
+    },
+    {
+      "name": "dtghv",
+      "price": "sdfgh",
+      "description": "fghj",
+      "image": "https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-max-gold-1-600x600.jpg",
+      "id": 9
+    }
+  ]
+}

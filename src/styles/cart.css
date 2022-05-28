@@ -1,0 +1,31 @@
+.container-cart{
+    min-height: calc(100vh - 129px);
+    padding-bottom: 150px;
+}
+.payment-container{
+    height: 100px;
+    background-color: rgb(215 230 253);
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 10;
+}
+.btn-payment{
+    width: 200px;
+    height: 50px;
+    margin: 25px;
+    background-color: rgb(245, 243, 132);
+    border: 1px solid rgb(160, 158, 158);
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(78, 78, 78);
+    cursor: pointer;
+}
+.btn-payment:hover{
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
+}

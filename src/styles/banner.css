@@ -1,0 +1,63 @@
+.banner-item {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.banner-item-1{
+    background-color: #d7e6fd;
+}
+.banner-item-2{
+    background-color: #e2f1cf;
+}
+.banner-item-3{
+    background-color: #cdf7e4;
+}
+.title-banner{
+    /* font-family: 'Nunito', sans-serif; */
+    font-size: 50px;
+    font-weight: bold;
+    color: rgb(34, 109, 230);
+}
+
+.service-container{
+    display: flex;
+    padding: 20px;
+    margin-top: 50px;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.img-banner{
+    height: 500px;
+    max-width: 550px;
+}
+
+.img-responsive{
+    height: 45px;
+    margin: 3px 7px;
+}
+
+.img-banner-2{
+    width: 100%;
+    transition: 0.3s ease-in-out;
+}
+.img-banner-2:hover{
+   transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+    .title-banner {
+        font-size: 30px;
+    }
+
+    .service-container {
+        display: none;
+    }
+
+    .img-banner {
+        width: 100vw;
+        height: 100px;
+    }
+}
