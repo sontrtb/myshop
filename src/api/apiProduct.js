@@ -3,7 +3,6 @@ import { _rootPath, rootAPI } from "./rootAPI";
 const path = {
     product: _rootPath + "/product",
     createproduct: _rootPath + "/product/create",
-    search: _rootPath + "/products/search?q=",
     random: _rootPath + "/product/random",
     productFind: _rootPath + "/product/find",
 };
@@ -24,18 +23,6 @@ const getProduct = (id, callback) => {
     rootAPI({
         withToken: false
     }).get(path.productFind + "/" + id)
-        .then(res => {
-            return callback(res.data);
-        })
-        .catch(err => {
-            return callback(null, err);
-        })
-}
-
-const getSearchProducts = (param, callback) => {
-    rootAPI({
-        withToken: false
-    }).get(path.product + "/products/search?q=" + param)
         .then(res => {
             return callback(res.data);
         })
@@ -96,7 +83,6 @@ export default {
     deleteProduct,
     getListProducts,
     addProduct,
-    getSearchProducts,
     getProduct,
     editProduct,
     radomProduct,

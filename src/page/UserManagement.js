@@ -1,62 +1,81 @@
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Modal, notification } from 'antd';
 import { useState, useEffect } from 'react';
 import '../styles/admin.css'
-import apiProduct from '../api/apiProduct';
+import apiUser from '../api/apiUser';
 
 function UserManagement(){
 
-  const [products, setProducts] = useState([]);
-  const [edit, setEdit] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [valueModal, setValueModal] = useState({});
+  const { confirm } = Modal;
 
-    useEffect(() => {
-      apiProduct.getListProducts((res, err) => {
-        if(res){
-          setProducts(res.products);
-        }
-      })
-    } , [])
+  const [listUser, setListUser] = useState([]);
+  const [refetch, setRefetch] = useState(false);
 
-    //delete
-    const handleDelete = (record) => {}
+  useEffect(() => {
+    apiUser.getAllUser((res, err) => {
+      if(res){
+        setListUser(res.users);
+      }
+    })
+  } , [refetch]);
 
-    return(
-      <div>
-        <div className="container container-admin">
-            <h1 className='title-page'>Quản lý người dùng</h1>
+  console.log('user');
 
-            <table className="table-products">
-              <thead>
-                <tr>
-                  <th>Tên người dùng</th>
-                  <th>Email</th>
-                  <th>
-                    Số điện thoại
-                  </th>
-                  <th>Địa chỉ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map(product => (
-                    <tr key={product.id}>
-                      <td>{product.name}</td>
-                      <td>{product.price}</td>
-                      <td>{product.description}</td>
-                      <td>
-                            <DeleteOutlined
-                                style={{color: 'red', cursor: 'pointer', fontSize: '20px'}}
-                                onClick={() => handleDelete(product)}
-                            />
-                      </td>
-                    </tr>
-                ))}
-              </tbody>
-          </table>
-        </div>
+  //delete
+  const handleDelete = (userId) => {
+    confirm({
+      title: 'Bạn có muốn xóa người dùng này ?',
+      icon: <ExclamationCircleOutlined />,
     
+      onOk(){
+        apiUser.deleteUser( userId, (res, err) => {
+          if(res){
+            setRefetch(!refetch);
+            notification.success({
+              message: "Xóa người dùng thành công",
+            });
+          }
+        })
+      },
+
+      onCancel() {
+        console.log('Cancel');
+      },
+
+    });
+  }
+
+  return(
+    <div>
+      <div className="container container-admin">
+          <h1 className='title-page'>Quản lý người dùng</h1>
+
+          <table className="table-products">
+            <thead>
+              <tr>
+                <th>Tên tài khoản</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listUser?.map(user => (
+                  <tr key={user.id}>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>
+                          <DeleteOutlined
+                              style={{color: 'red', cursor: 'pointer', fontSize: '20px'}}
+                              onClick={() => handleDelete(user._id)}
+                          />
+                    </td>
+                  </tr>
+              ))}
+            </tbody>
+        </table>
       </div>
-    )
+  
+    </div>
+  )
 }
 
 export default UserManagement;

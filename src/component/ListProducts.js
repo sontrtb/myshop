@@ -56,7 +56,7 @@ function ListProducts( {title, full, searchValue} ) {
                     alt="Ảnh sản phẩm"
                   />
                   <h3 className='name-product'>{product.title}</h3>
-                  <h3 className='price-product'><DollarOutlined style={{marginRight: "5px"}}/>1000</h3>
+                  <h3 className='price-product'><DollarOutlined style={{marginRight: "5px"}}/>{product.price}</h3>
                   <p className='list-producrt_description'>{product.description}</p>
                 </div>
                 <div className='add-to-cart-container'>

@@ -44,12 +44,17 @@ function Navbar() {
                                 </li>
                                 <li>
                                     {
-                                        checkAdmin() && <NavLink to="/product_management" className="navbar-item">Quản lý sản phẩm</NavLink>
+                                        checkAdmin() && <NavLink to="/product_management" className="navbar-item">Sản phẩm</NavLink>
                                     }
                                 </li>
                                 <li>
                                     {
-                                        checkAdmin() &&<NavLink to="/user_management" className="navbar-item">Quản lý người dùng</NavLink>
+                                        checkAdmin() && <NavLink to="/order_management" className="navbar-item">Đơn hàng</NavLink>
+                                    }
+                                </li>
+                                <li>
+                                    {
+                                        checkAdmin() && <NavLink to="/user_management" className="navbar-item">Người dùng</NavLink>
                                     }
                                 </li>
                             </ul>

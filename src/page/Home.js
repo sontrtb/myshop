@@ -10,7 +10,7 @@ function Home(){
             <Banner />
             <ListProducts
                 title="Điện thoại"
-                full={false}
+                full={true}
             />
             <Footer />
         </div>

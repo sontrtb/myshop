@@ -1,16 +1,13 @@
 import { _rootPath, rootAPI } from "./rootAPI";
 
 const path = {
-    auth: {
-        login: _rootPath + "/auth/login",
-        register: _rootPath + "/auth/register",
-    }
+    user: _rootPath + "/users",
 }
 
-function login(data, callback) {
+const getAllUser = (callback) => {
     rootAPI({
-        withToken: false
-    }).post(path.auth.login, data)
+        withToken: true
+    }).get(path.user)
     .then(res => {
         return callback(res.data);
     })
@@ -19,10 +16,10 @@ function login(data, callback) {
     });
 }
 
-function register(data, callback) {
+function deleteUser(id, callback) {
     rootAPI({
-        withToken: false
-    }).post(path.auth.register, data)
+        withToken: true
+    }).delete(path.user + '/' + id)
     .then(res => {
         return callback(res.data)
     })
@@ -32,6 +29,6 @@ function register(data, callback) {
 }
 
 export default {
-    login,
-    register
+    getAllUser,
+    deleteUser,
 };

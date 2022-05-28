@@ -3,7 +3,6 @@ import { useState, useContext } from 'react';
 import {  DollarOutlined } from '@ant-design/icons';
 import "../../styles/modal/product-modal.css";
 import Context from '../../store/Context';
-import SelectAddress from '../SelectAddress';
 import apiOrder from '../../api/apiOrder';
 
 function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity, product }) {

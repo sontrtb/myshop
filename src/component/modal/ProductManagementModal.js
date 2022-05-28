@@ -1,6 +1,7 @@
 import { notification, Modal, Input } from 'antd';
 import UploadImage from './UploadImage';
 import apiProduct from '../../api/apiProduct';
+import { Select } from 'antd';
 
 function ProductManagementModal(props) {
 
@@ -14,6 +15,8 @@ function ProductManagementModal(props) {
     } = props;
 
     const { TextArea } = Input;
+    const { Option } = Select;
+
     let titleModal = edit ? 'Sửa thông tin sản phẩm' : 'Thêm sản phẩm';
 
     const handleOk = () => {
@@ -64,7 +67,11 @@ function ProductManagementModal(props) {
 
     const handleGetValue = (e) => {
       setValueModal({...valueModal, [e.target.name]: e.target.value});
-    }
+    };
+
+    const handleChangeTypeProduct = (value) => {
+      setValueModal({...valueModal, type: value});
+    };
 
     return (
       <Modal title={titleModal} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
@@ -75,6 +82,19 @@ function ProductManagementModal(props) {
           name="title"
           onChange={e => handleGetValue(e)}
         />
+
+        <h3>Danh mục sản phẩm</h3>
+        <Select
+          value={valueModal.type}
+          style={{ width: "100%" }}
+          onChange={handleChangeTypeProduct}
+          placeholder="Danh mục sản phẩm"
+        > 
+          <Option value="phone">Điện thoại</Option>
+          <Option value="computer">Máy tính</Option>
+          <Option value="accessories">Phụ kiện</Option>
+        </Select>
+
         <h3>Giá</h3>
         <Input
           value={valueModal.price}
@@ -82,7 +102,8 @@ function ProductManagementModal(props) {
           name="price"
           onChange={e => handleGetValue(e)}
         />
-        <h3>Mô tả</h3>
+
+        <h3>Mô tả sản phẩm</h3>
         <TextArea
           value={valueModal.description}
           placeholder="Mô tả"

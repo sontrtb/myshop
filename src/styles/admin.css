@@ -22,3 +22,8 @@ td{
     height: 90px;
     max-width: 90px;
 }
+.filter-product{
+    width: 90px;
+    margin-left: 5px;
+    border: none;
+}
