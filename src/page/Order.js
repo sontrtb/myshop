@@ -1,58 +1,108 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
 import '../styles/cart.css';
-import apiCart from '../api/apiCart';
-
+import apiBill from "../api/apiBill";
+import { notification, Tag } from 'antd';
 
 function Order(){
 
-    const [products, setProducts] = useState([]);
+    const [listBills, setListBills] = useState([]);
 
     useEffect(() => {
-        apiCart.getListCart((res, err) => {
-          if(res){
-            console.log(res);
-          }
-        })
+      apiBill.getListBill((res, err) => {
+        if(res){
+          setListBills(res);
+        }
+      })
     }, []);
 
+    const handleEditStatus = (bill, index) => {
+      apiBill.editBill({...bill, status: !bill.status}, (res, err) => {
+        if(res){
+          listBills[index] = {...listBills[index], status: true}
+          setListBills([...listBills])
+          notification['success']({
+            message: 'Đơn hàng đã được xử lý'
+          });
+        }
+      })
+    }
+
+    const handleDeleteBill = (bill, index) => {
+      if(!bill.status){
+        notification.error({
+          message: 'Đơn hàng chưa được xác nhận'
+        });
+        return;
+      }
+      apiBill.deleteBill(bill.id, (res, err) => {
+        if(res){
+          const newListBill = listBills.filter(item => item.id != bill.id)
+          setListBills([...newListBill])
+          notification['success']({
+            message: 'Đã xóa đơn hàng'
+          });
+        }
+      })
+    }
 
     return(
         <div className="container container-cart">
-            <h1 className='title-page'>Giỏ hàng</h1>
+            <h1 className='title-page'>Đơn hàng</h1>
+
+            <div>
+              <div>Mua nhanh</div>
+              <div>Từ giỏ hàng</div>
+            </div>
+
             <table className="table-products">
               <thead>
                 <tr>
-                  <th>Ảnh</th>
-                  <th>Tên sản phẩm</th>
-                  <th>Đơn giá</th>
+                  <th>Tên khách hàng</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
+                  <th>Sản phẩm</th>
                   <th>Số lượng</th>
-                  {/* <th>Số tiền</th> */}
+                  <th>Tổng tiền</th>
+                  <th>Trạng thái</th>
                 </tr>
               </thead>
               <tbody>
-                {products.map(product => (
-                    <tr key={product.id}>
-                      <td>{product.name}</td>
+                {listBills?.reverse().map((bill, index) => (
+                    <tr
+                      key={bill.id}
+                      style={{backgroundColor: bill.status ? "#9df5a0" : "#fc8781"}}
+                    >
+                      <td>{bill.username}</td>
+                      <td>{bill.address}</td>
+                      <td>{bill.phone}</td>
+                      <td>{bill.title}</td>
+                      <td>{bill.quantity}</td>
+                      <td>{bill.price}</td>
                       <td>
-                          <img className={'admin-products-img'} src={product.image}/>
+                        {
+                          bill.status ?
+                          <Tag color="blue"> Đã xử lý </Tag>
+                          :
+                          <Tag
+                            color="orange"
+                            onClick={() => handleEditStatus(bill, index)}
+                            className="cursor-pointer"
+                          >
+                            Chưa xử lý
+                          </Tag>
+                        }
                       </td>
-                      <td>{product.price}</td>
-                      <td>{product.description}</td>
                       <td>
-                            <DeleteOutlined
-                                style={{color: 'red', cursor: 'pointer', fontSize: '20px'}}
-                                // onClick={() => handleDelete(product)}
-                            />
+                        <DeleteOutlined
+                          style={{color: "red"}}
+                          onClick={() => handleDeleteBill(bill, index)}
+                        />
                       </td>
                     </tr>
                 ))}
               </tbody>
             </table>
-            <div className='payment-container'>
-                <h1 style={{margin:0}}>Tổng thanh toán: </h1>
-                <button className="btn-payment">Thanh toán</button>
-            </div>
         </div>
     )
 }

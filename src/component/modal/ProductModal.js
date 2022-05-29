@@ -3,30 +3,32 @@ import { useState, useContext, useEffect } from 'react';
 import {  DollarOutlined } from '@ant-design/icons';
 import "../../styles/modal/product-modal.css";
 import apiUser from '../../api/apiUser';
+import apiBill from '../../api/apiBill';
 import Context from '../../store/Context';
 
-function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity, product }) {
+function ProductModal({ isModalVisible, setIsModalVisible, quantity, product }) {
 
     // const [state, dispatch] = useContext(Context)
     // const user = state.inforUser;
 
-    const [ informationOrder, setInformationOrder ] = useState({
-        title: product.title,
-        img: product.img,
-        price: 0,
-        quantity: quantity,
-        address: '',
-        username: '',
-        phone: '',
-    });
+    const [ informationOrder, setInformationOrder ] = useState({});
 
     useEffect(() => {
         apiUser.getUser("6292c646677c4aa6817a4c28", (res, err) => {
             if(res){
-                setInformationOrder({informationOrder, ...res.info});
+                setInformationOrder(res.info);
             }
         })
-    }, []);
+        setInformationOrder(
+            {
+                ...informationOrder,
+                title: product.title,
+                quantity: quantity,
+                price: quantity*product.price,
+                status: false,
+
+            })
+    }, [product, quantity]);
 
     const validateForm = (informationOrder) => {
         if(!informationOrder.username){
@@ -38,11 +40,6 @@ function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity
         if(!informationOrder.phone)
             return {
                 message: 'Số điện thoại không được để trống',
-                status: false
-            }
-        if(!informationOrder.phone)
-            return {
-                message: 'Số điện thoại không hợp lệ',
                 status: false
             }
         if(!informationOrder.address)
@@ -61,18 +58,19 @@ function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity
     }
 
     const handleOk = () => {
+        setInformationOrder({...informationOrder, price: quantity*product.price})
+
         if(validateForm(informationOrder) === true) {
-            
-            // apiOrder.creactOrder(informationOrder, (res, err) => {
-            //     if(res){
-            //         notification['success']({
-            //             message: 'Đặt hàng thành công',
-            //             description: 'Vui lòng chờ xác nhận từ nhân viên bán hàng',
-            //         });
-            //     }
-            //     setInformationOrder({});
-            //     setIsModalVisible(false);
-            // })
+            apiBill.creactBill(informationOrder, (res, err) => {
+                if(res){
+                    notification['success']({
+                        message: 'Đặt hàng thành công',
+                        description: 'Vui lòng chờ xác nhận từ nhân viên bán hàng',
+                    });
+                }
+                setInformationOrder({});
+                setIsModalVisible(false);
+            })
         } else {
             notification['error']({
                 message: 'Vui lòng điền đầy đủ thông tin',
@@ -111,7 +109,7 @@ function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity
                 <h3>Tên :</h3>
                 <Input
                     placeholder="Phạm Văn A"
-                    name="name"
+                    name="username"
                     value={informationOrder.username}
                     onChange={e => handleChange(e)}
                 />

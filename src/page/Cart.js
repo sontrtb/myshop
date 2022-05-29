@@ -35,7 +35,7 @@ function Cart(){
               <th>Ảnh</th>
               <th>Đơn giá</th>
               <th>Số lượng</th>
-              <th>Số tiền</th>
+              {/* <th>Số tiền</th> */}
             </tr>
           </thead>
           <tbody>
@@ -64,9 +64,9 @@ function Cart(){
                         down={() => setSumPrice(sumPrice - product.cart.productId.price)}
                       />
                     </td>
-                    <td>
+                    {/* <td>
                       <div style={{color: "#ee4d2d", fontWeight: "500"}}>{product.cart.totalProduct}</div>
-                    </td>
+                    </td> */}
                     {/* <td>
                           <DeleteOutlined
                               style={{color: 'red', cursor: 'pointer', fontSize: '20px'}}
@@ -82,7 +82,7 @@ function Cart(){
         <div className='payment-container'>
             <h1 style={{margin:0}}>Tổng thanh toán: </h1>
             <h1 className='price_cart'>{sumPrice + "đ"}</h1>
-            <button className="btn-payment">Thanh toán</button>
+            <button className="btn-payment" >Thanh toán</button>
         </div>
     </div>
   )

@@ -92,7 +92,10 @@ function Navbar() {
                                 <SearchOutlined
                                     style={{fontSize: '25px'}}
                                     className="search-icon"
-                                    onClick={() => navigate('/search/' + searchValue)}
+                                    onClick={() => {
+                                        navigate('/search/' + searchValue)
+                                        setSearchValue('')
+                                    }}
                                 />
                             </div>
                             

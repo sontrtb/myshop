@@ -55,6 +55,8 @@ function UserManagement(){
               <tr>
                 <th>Tên tài khoản</th>
                 <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +64,8 @@ function UserManagement(){
                   <tr key={user.id}>
                     <td>{user.username}</td>
                     <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.address}</td>
                     <td>
                           <DeleteOutlined
                               style={{color: 'red', cursor: 'pointer', fontSize: '20px'}}

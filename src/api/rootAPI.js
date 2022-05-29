@@ -2,7 +2,6 @@ import axios from "axios";
 import Cookies from 'js-cookie'
 
 export const _rootPath = process.env.REACT_APP_API_URL;
-export const _rootPathAuth = process.env.REACT_APP_API_URL_AUTH;
 export const _rootPathMock = process.env.REACT_APP_API_MOCK;
 
 const _defaultOptions = {
