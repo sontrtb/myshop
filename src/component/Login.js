@@ -76,6 +76,7 @@ function Login({setDisplayRegister}) {
                 </div>
                 <div className="form-item">
                     <input
+                        type='password'
                         className='input-login'
                         placeholder='Mật khẩu'
                         value={account.password || ''}

@@ -22,24 +22,28 @@ function Register({setDisplayRegister}) {
             value: valueFormRegister.username,
             placeholder:"Tên đăng nhập",
             icon: <UserOutlined className="icon-auth"/>,
+            password: false,
         },
         {
             keyValue: "password",
             value: valueFormRegister.password,
             placeholder:"Mật khẩu",
             icon: <LockOutlined className="icon-auth"/>,
+            password: true,
         },
         {
             keyValue: "passwordAgain",
             value: valueFormRegister.passwordAgain,
             placeholder:"Nhập lại mật khẩu",
             icon: <LockOutlined className="icon-auth"/>,
+            password: true,
         },
         {
             keyValue: "email",
             value: valueFormRegister.email,
             placeholder:"Địa chỉ Email",
             icon: <MailOutlined className="icon-auth"/>,
+            password: false,
         },
     ]
 
@@ -100,9 +104,10 @@ function Register({setDisplayRegister}) {
             <h1>Đăng ký</h1>
             <div className='form-login'>
                 {
-                    listInput.map(({keyValue, placeholder, icon, value}, index) => (
+                    listInput.map(({keyValue, placeholder, icon, value, password}, index) => (
                         <div className="form-item" key={index}>
                             <input
+                                type={password ? 'password' : 'text'}
                                 className='input-login'
                                 placeholder={placeholder}
                                 value={ value || '' }
