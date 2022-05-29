@@ -4,6 +4,7 @@ import '../styles/cart.css';
 import apiCart from '../api/apiCart';
 import { useNavigate } from 'react-router-dom';
 import InputQuaitityCart from "../component/InputQuaitityCart";
+import { notification } from 'antd';
 
 function Cart(){
 
@@ -23,7 +24,19 @@ function Cart(){
 
   const handleOpenProduct = (id) => {
     navigate(`/product/${id}`);
-  } 
+  }
+
+  const handlePay = () => {
+    apiCart.deleteCart((res, err) => {
+      if(res){
+        notification['success']({
+          message: 'Đã gửi yêu cầu mua hàng đến người bán'
+        });
+        setProductsCart([]);
+        setSumPrice(0);
+      }
+    })
+  }
 
   return(
     <div className="container container-cart">
@@ -82,7 +95,12 @@ function Cart(){
         <div className='payment-container'>
             <h1 style={{margin:0}}>Tổng thanh toán: </h1>
             <h1 className='price_cart'>{sumPrice + "đ"}</h1>
-            <button className="btn-payment" >Thanh toán</button>
+            <button
+              className="btn-payment"
+              onClick={handlePay}
+            >
+              Thanh toán
+            </button>
         </div>
     </div>
   )

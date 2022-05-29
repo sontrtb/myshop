@@ -4,6 +4,7 @@ const path = {
     bill: _rootPath + "/cart/bill",
     listcart: _rootPath + "/cart",
     creactCart: _rootPath + "/cart/create",
+    allCart: _rootPath + "/cart/admin",
 };
 
 const creactCart = (data, callback) => {
@@ -18,10 +19,35 @@ const creactCart = (data, callback) => {
     })
 }
 
+const deleteCart = (callback) => {
+    rootAPI({
+        withToken: true
+    }).delete(path.bill)
+    .then(res => {
+        return callback(res.data);
+    })
+    .catch(err => {
+        return callback(null, err);
+    })
+}
+
+
 const getListCart = (callback) => {
     rootAPI({
         withToken: true
     }).get(path.listcart)
+    .then(res => {
+        return callback(res.data);
+    })
+    .catch(err => {
+        return callback(null, err);
+    })
+}
+
+const getAllCart = (callback) => {
+    rootAPI({
+        withToken: true
+    }).get(path.allCart)
     .then(res => {
         return callback(res.data);
     })
@@ -45,5 +71,7 @@ const getListCart = (callback) => {
 
 export default {
     getListCart,
-    creactCart
+    creactCart,
+    getAllCart,
+    deleteCart
 };
