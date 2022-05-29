@@ -90,6 +90,12 @@ function Product() {
                         />
                     </div>
 
+                    <div className="row" style={{marginTop: '10px'}}>
+                        <h3 style={{margin: 0}}>Tổng:</h3>
+                        <span style={{paddingRight: "30px"}}></span>
+                        <h2 style={{color: 'red'}}>{quantity * product.price + " VNĐ"}</h2>
+                    </div>
+
                     <Space style={{marginTop: "20px"}}>
                         <Button type="primary" ghost onClick={handleAddCart}>
                             <ShoppingCartOutlined />
