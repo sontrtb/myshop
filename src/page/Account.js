@@ -12,10 +12,7 @@ function Account() {
             <div className='container'>
                 <div className='login-register-content'>
                     <div>
-                        <div className='logo-login'>
-                            <h1 style={{margin: 0, color:'rgb(34, 109, 230)', fontSize:'100px'}}>Nhóm 7</h1>
-                            <h1>Công nghệ phần mềm</h1>
-                        </div>
+                        <div className='logo_login' />
                     </div>
                     <div>
                         {

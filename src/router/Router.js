@@ -9,6 +9,8 @@ import ProductDetail from '../page/ProductDetail';
 import Infomation from '../page/Infomation';
 import Search from "../page/Search";
 import UserManagement from "../page/UserManagement";
+import Order from "../page/Order";
+import CategoryProduct from "../page/CategoryProduct";
 
 import jwtDecode from "jwt-decode";
 
@@ -54,8 +56,10 @@ function RouterApp(){
                         }
                     />
                     <Route path='/cart' element={<Cart />} />
+                    <Route path="/order_management" element={<Order />} />
                     <Route path="/product/:id" element={<ProductDetail />}/>
-                    <Route path="/search/:param" element={<Search />}/>
+                    <Route path="/categoty/:type/:title" element={<CategoryProduct />}/>
+                    <Route path="/search/:search" element={<Search />}/>
                     <Route path="*" element={<Home />}/>
                 </Routes>
             </div>

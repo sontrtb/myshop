@@ -35,16 +35,22 @@ function Navbar() {
                 <div className="container navbar-body">
                         <div style={{display:"flex", alignItems:'center'}}>
                             <NavLink to="/">
-                                <h1 style={{margin: 0, color:'rgb(34, 109, 230)'}}>Nhóm 7</h1>
+                                <div className="logo_navbar" />
                             </NavLink>
                             
-                            <ul className="navbar-list" style={{display:""}}>
+                            <ul className="navbar-list">
                                 <li>
                                     <NavLink to="/" className="navbar-item">Trang chủ</NavLink>
                                 </li>
                                 <li>
                                     {
-                                        checkAdmin() && <NavLink to="/product_management" className="navbar-item">Sản phẩm</NavLink>
+                                        checkAdmin() &&
+                                        <NavLink
+                                            to="/product_management"
+                                            className="navbar-item"
+                                        >
+                                            Sản phẩm
+                                        </NavLink>
                                     }
                                 </li>
                                 <li>
@@ -57,6 +63,21 @@ function Navbar() {
                                         checkAdmin() && <NavLink to="/user_management" className="navbar-item">Người dùng</NavLink>
                                     }
                                 </li>
+                                <li>
+                                    {
+                                        !checkAdmin() && <NavLink to="/categoty/phone/Điện%20thoại" className="navbar-item">Điện thoại</NavLink>
+                                    }
+                                </li>
+                                <li>
+                                    {
+                                        !checkAdmin() && <NavLink to="/categoty/computer/Máy%20tính" className="navbar-item">Máy tính</NavLink>
+                                    }
+                                </li>
+                                <li>
+                                    {
+                                        !checkAdmin() && <NavLink to="/categoty/accessories/Phụ%20kiện%20điện%20tử" className="navbar-item">Phụ kiện</NavLink>
+                                    }
+                                </li>
                             </ul>
                         </div>
                         <div style={{display:'flex', alignItems:'center'}}>
@@ -66,24 +87,22 @@ function Navbar() {
                                     className="input-search"
                                     value={searchValue}
                                     onChange={e => setSearchValue(e.target.value)}
+                                    onKeyDown={e => e.key === 'Enter' && navigate('/search/' + searchValue)}
                                 />
                                 <SearchOutlined
                                     style={{fontSize: '25px'}}
                                     className="search-icon"
-                                    onClick={() => {
-                                        navigate('/search/' + searchValue)
-                                        setSearchValue('')
-                                    }}
+                                    onClick={() => navigate('/search/' + searchValue)}
                                 />
                             </div>
                             
                             {
-                                checkToken() &&
-                                <Badge count={5} className="navbar-icon">
+                                checkToken() && !checkAdmin() &&
+                                // <Badge count={5} className="navbar-icon">
                                     <NavLink to='/cart' style={{color: '#333'}}>
                                         <ShoppingCartOutlined style={{fontSize: '30px'}} />
                                     </NavLink>
-                                </Badge>
+                                // </Badge>
                             }
                             
                             <NavLink to="/user" className="navbar-item">

@@ -1,9 +1,9 @@
 import { Modal, Button, Input, Divider, Row, Col, notification } from 'antd';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {  DollarOutlined } from '@ant-design/icons';
 import "../../styles/modal/product-modal.css";
+import apiUser from '../../api/apiUser';
 import Context from '../../store/Context';
-import apiOrder from '../../api/apiOrder';
 
 function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity, product }) {
 
@@ -16,32 +16,40 @@ function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity
         price: 0,
         quantity: quantity,
         address: '',
-        name: '',
+        username: '',
         phone: '',
     });
 
+    useEffect(() => {
+        apiUser.getUser("6292c646677c4aa6817a4c28", (res, err) => {
+            if(res){
+                setInformationOrder({informationOrder, ...res.info});
+            }
+        })
+    }, []);
+
     const validateForm = (informationOrder) => {
-        // if(informationOrder.name === undefined || informationOrder.name.length === 0){
-        //     return {
-        //             message: 'Tên không được để trống',
-        //             status: false
-        //         }
-        // }
-        // if(informationOrder.phone === undefined || informationOrder.phone.length === 0 )
-        //     return {
-        //         message: 'Số điện thoại không được để trống',
-        //         status: false
-        //     }
-        // if( isNaN(informationOrder.phone) || informationOrder.phone.length < 10 )
-        //     return {
-        //         message: 'Số điện thoại không hợp lệ',
-        //         status: false
-        //     }
-        // if(informationOrder.address === undefined || informationOrder.address.length === 0)
-        //     return {
-        //         message: 'Địa chỉ không được để trống',
-        //         status: false
-        //     }
+        if(!informationOrder.username){
+            return {
+                    message: 'Tên không được để trống',
+                    status: false
+                }
+        }
+        if(!informationOrder.phone)
+            return {
+                message: 'Số điện thoại không được để trống',
+                status: false
+            }
+        if(!informationOrder.phone)
+            return {
+                message: 'Số điện thoại không hợp lệ',
+                status: false
+            }
+        if(!informationOrder.address)
+            return {
+                message: 'Địa chỉ không được để trống',
+                status: false
+            }
         return true;
     }
 
@@ -55,16 +63,16 @@ function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity
     const handleOk = () => {
         if(validateForm(informationOrder) === true) {
             
-            apiOrder.creactOrder(informationOrder, (res, err) => {
-                if(res){
-                    notification['success']({
-                        message: 'Đặt hàng thành công',
-                        description: 'Vui lòng chờ xác nhận từ nhân viên bán hàng',
-                    });
-                }
-                setInformationOrder({});
-                setIsModalVisible(false);
-            })
+            // apiOrder.creactOrder(informationOrder, (res, err) => {
+            //     if(res){
+            //         notification['success']({
+            //             message: 'Đặt hàng thành công',
+            //             description: 'Vui lòng chờ xác nhận từ nhân viên bán hàng',
+            //         });
+            //     }
+            //     setInformationOrder({});
+            //     setIsModalVisible(false);
+            // })
         } else {
             notification['error']({
                 message: 'Vui lòng điền đầy đủ thông tin',
@@ -75,7 +83,6 @@ function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity
 
     const handleCancel = () => {
         setIsModalVisible(false);
-        setInformationOrder({});
     };
 
     return (
@@ -101,11 +108,11 @@ function ProductModal({ isModalVisible, setIsModalVisible, quantity, setQuantity
             <div>
                 <h2>Thông tin liên hệ</h2>
 
-                <h3>Họ và tên :</h3>
+                <h3>Tên :</h3>
                 <Input
                     placeholder="Phạm Văn A"
                     name="name"
-                    value={informationOrder.name}
+                    value={informationOrder.username}
                     onChange={e => handleChange(e)}
                 />
 

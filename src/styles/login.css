@@ -7,7 +7,7 @@
 .login-register-content{
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    /* align-items: center; */
     padding: 50px;
 }
 .form-login{
@@ -54,10 +54,12 @@
     cursor: pointer;
 }
 
-.logo-login{
-    position: absolute;
-    left: 0;
-    top: 130px;
+.logo_login{
+    background-image: url("../image/logo.png");
+    background-size: cover;
+    width: 550px;
+    height: 220px;
+    margin-top: 60px;
 }
 
 .form-item{

@@ -19,12 +19,13 @@ function ProductManagement(){
   const [filterProduct, setFilterProduct] = useState('');
 
   useEffect(() => {
-    apiProduct.getListProducts((res, err) => {
+    const params = {type: filterProduct}
+    apiProduct.getListProducts(params ,(res, err) => {
       if(res){
         setProducts(res.product);
       }
     })
-  } , [refetch])
+  } , [refetch, filterProduct]);
 
   //edit
   const handleEdit = (record) => {
@@ -85,9 +86,9 @@ function ProductManagement(){
           <table className="table-products">
             <thead>
               <tr>
-                <th>Tên sản phẩm</th>
-                <th>Ảnh</th>
-                <th>
+                <th style={{width: "15%"}}>Tên sản phẩm</th>
+                <th style={{width: "10%"}}>Ảnh</th>
+                <th style={{width: "15%"}}>
                   Danh mục
                   <select
                     value={filterProduct}
@@ -100,8 +101,8 @@ function ProductManagement(){
                     <option value="accessories">Phụ kiện</option>
                   </select>
                 </th>
-                <th>Giá</th>
-                <th>Mô tả</th>
+                <th style={{width: "10%"}}>Giá</th>
+                <th style={{width: "45%"}}>Mô tả</th>
               </tr>
             </thead>
             <tbody>

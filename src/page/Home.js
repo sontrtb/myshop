@@ -10,7 +10,18 @@ function Home(){
             <Banner />
             <ListProducts
                 title="Điện thoại"
-                full={true}
+                full={false}
+                type='phone'
+            />
+            <ListProducts
+                title="Máy tính"
+                full={false}
+                type='computer'
+            />
+            <ListProducts
+                title="Phụ kiện điện tử"
+                full={false}
+                type='accessories'
             />
             <Footer />
         </div>

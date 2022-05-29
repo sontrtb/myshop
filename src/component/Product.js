@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Col, Row , Divider, Button, Space } from "antd";
+import { Col, Row , Divider, Button, Space, notification } from "antd";
 import InputQuaitity from "./InputQuaitity";
 
 import ProductModal from "./modal/ProductModal";
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
 import apiProduct from "../api/apiProduct";
+import apiCart from "../api/apiCart";
 
 import '../styles/product.css'
 
@@ -40,6 +41,32 @@ function Product() {
         showModal();
     }
 
+    const handleAddCart = () => {
+        const cartBody = {
+            "productId": id,
+            "productQuantity": quantity,
+        }
+        apiCart.creactCart(cartBody, (res, err) => {
+            if(res){
+                notification.success({
+                    message: "Đã thêm sản phẩm vào giỏ hàng"
+                })
+            }
+            else {
+                if(err.message === "Request failed with status code 403"){
+                    notification.warning({
+                        message: "Sản phẩm đã có trong giỏ hàng"
+                    })
+                }
+                else{
+                    notification.error({
+                        message: err.message
+                    })
+                }    
+            }
+        })
+    };
+
     return(
         <div className="container">
             <Row justify="space-between" align="middle" className="product-container">
@@ -52,13 +79,19 @@ function Product() {
                     <p>{product.description}</p>
 
                     <Divider></Divider>
+                    
+                    <div className="row">
+                        <h3>Số lượng:</h3>
+                        <span style={{paddingRight: "30px"}}></span>
+                        <InputQuaitity
+                            quantity={quantity}
+                            setQuantity={setQuantity}
+                            disable={false}
+                        />
+                    </div>
 
-                    <InputQuaitity
-                        quantity={quantity}
-                        setQuantity={setQuantity}
-                    />
                     <Space style={{marginTop: "20px"}}>
-                        <Button type="primary" ghost >
+                        <Button type="primary" ghost onClick={handleAddCart}>
                             <ShoppingCartOutlined />
                             Thêm vào giỏ hàng
                         </Button>

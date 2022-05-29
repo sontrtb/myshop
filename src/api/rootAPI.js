@@ -33,7 +33,7 @@ export function rootAPI(options = {}) {
     _root.interceptors.request.use((config) => {
         if (defaultOptions.withToken) {
             const token = JSON.parse(localStorage.getItem('token'));
-            config.headers.token = token ? `Bearer ${token}` : '';
+            config.headers.Authorization = token ? `Bearer ${token}` : '';
         } else {
             const token = Cookies.get('token') ?? "";
         }

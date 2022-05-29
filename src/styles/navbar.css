@@ -20,7 +20,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0;
-    margin: 0 0 0 70px;
+    margin: 0 0 0 30px;
     list-style: none;
     position: relative;
 }
@@ -84,6 +84,7 @@
 .search-container{
     display: flex;
     position: relative;
+    margin-right: 25px;
 }
 .input-search{
     width: 25vw;
@@ -112,6 +113,13 @@
 .navbar-icon{
     margin: 0 10px;
     cursor: pointer;
+}
+
+.logo_navbar {
+    background-image: url("../image/logo.png");
+    background-size: cover;
+    width: 170px;
+    height: 55px;
 }
 
 /* // */

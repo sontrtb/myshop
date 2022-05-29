@@ -1,15 +1,18 @@
-import {useParams} from 'react-router-dom';
 import ListProducts from '../component/ListProducts';
+import {useParams} from 'react-router-dom';
+import Footer from '../component/Footer';
 
 function Search() {
 
-    const {param} = useParams();
+    let {search} = useParams();
 
     return(
-        <div>
+        <div style={{marginTop: '130px'}}>
             <ListProducts
-                title={`Kết quả tìm kiếm với từ khóa "${param}"`}
-                searchValue={param}
+                title={"Danh sách tìm kiếm: " + search}
+                type={''}
+                full={true}
+                search={search}
             />
         </div>
     )

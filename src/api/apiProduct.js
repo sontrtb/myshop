@@ -5,12 +5,25 @@ const path = {
     createproduct: _rootPath + "/product/create",
     random: _rootPath + "/product/random",
     productFind: _rootPath + "/product/find",
+    search: _rootPath + "/product/search",
 };
 
-const getListProducts = (callback) => {
+const getListProducts = (params, callback) => {
     rootAPI({
         withToken: false
-    }).get(path.product)
+    }).get(path.product, {params: params})
+        .then(res => {
+            return callback(res.data);
+        })
+        .catch(err => {
+            return callback(null, err);
+        })
+}
+
+const getProductsSearch = (params, callback) => {
+    rootAPI({
+        withToken: false
+    }).get(path.search, {params: params})
         .then(res => {
             return callback(res.data);
         })
@@ -86,4 +99,5 @@ export default {
     getProduct,
     editProduct,
     radomProduct,
+    getProductsSearch
 };
